@@ -1,0 +1,5 @@
+{
+	"preset": "airbnb",
+	"safeContextKeyword": ["that"],
+	maximumLineLength: null
+}

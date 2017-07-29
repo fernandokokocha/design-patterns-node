@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "mocha --recursive test",
     "test:unit": "mocha --recursive test/unit",
     "test:integration": "mocha --recursive test/integration",
+    "test:fake": "ENV=test mocha --recursive test/withFakeAdapter",
     "style:check": "jscs .",
     "style:fix": "jscs --fix ."
   },

@@ -10,11 +10,12 @@ If you want to use the service in real life, copy `config/example.config.js` to 
 
 #### Tests
 
-`npm t` for all tests
+`npm run test:unit` for unit tests
 
-`npm run test:unit` for only unit tests
+`npm run test:integration` for integration tests
 
-`npm run test:integration` for only integration tests
+`npm run test:fake` for tests using fake facebook adapter
+
 
 #### Code style
 

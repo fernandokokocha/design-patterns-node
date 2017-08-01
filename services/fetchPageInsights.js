@@ -1,27 +1,25 @@
 require('rootpath')();
 var facebookAdapter = require('adapters/facebook/facebookAdapter');
 
-module.exports = function FetchPage() {
+module.exports = function FetchPageInsights() {
   var that = this;
   that.resolve = null;
   that.reject = null;
   that.response = null;
 
-  this.run = function (pageId) {
+  this.run = function (pageId, metric) {
     return new Promise(
       function (resolve, reject) {
         that.resolve = resolve;
         that.reject = reject;
-        fetchPageInfo(pageId).then(onSuccess, onFail);
+        fetchPageInsights(pageId, metric).then(onSuccess, onFail);
       }
     );
   };
 
-  function fetchPageInfo(pageId) {
-    var pathname = pageId;
-    var options = {
-      fields: 'name,about,link,location,posts.limit(5).fields(message,type)',
-    };
+  function fetchPageInsights(pageId, metric) {
+    var pathname = pageId + '/insights/' + metric;
+    var options = {};
     return facebookAdapter.fetch(pathname, options);
   }
 
@@ -36,11 +34,7 @@ module.exports = function FetchPage() {
   }
 
   function validateResponse() {
-    if (!that.response.name)
-      that.reject('Non-page object provided');
-    else if (!that.response.location || !that.response.location.city)
-      that.reject('Non-page object provided');
-    else if (!that.response.posts)
+    if (!that.response.data)
       that.reject('Non-page object provided');
   }
 };
